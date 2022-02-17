@@ -1,5 +1,11 @@
 import pygame
 from brick import Brick
+from random import randint
+
+def start_ball():
+    number_start = randint(100, 400)
+    return number_start
+
 
 pygame.init()  # Start pygame functions
 
@@ -36,10 +42,10 @@ player_move_right = False
 
 # ball
 ball = pygame.image.load("assets/ball.png")
-ball_x = 240
-ball_y = 300
-ball_dx = 5
-ball_dy = 5
+ball_x = 245
+ball_y = 290
+ball_dx = 2
+ball_dy = 2
 
 # bricks
 sprites_list = pygame.sprite.Group()
@@ -83,7 +89,12 @@ wall_sound = pygame.mixer.Sound('assets/wall.wav')
 brick_sound = pygame.mixer.Sound('assets/brick.wav')
 miss_sound = pygame.mixer.Sound('assets/miss.wav')
 
+
 while game_loop:
+    # ball movement
+    ball_x = ball_x + ball_dx
+    ball_y = ball_y + ball_dy
+    screen.fill(BLACK)
 
     # events
     for event in pygame.event.get():
@@ -98,6 +109,27 @@ while game_loop:
         if score < SCORE_MAX:
             # clear screen
             screen.fill(BLACK)
+        
+        # ball collision with the wall
+        if ball_x > 520:
+            ball_dx *= -1
+        elif ball_x <= 0:
+            ball_dx *= -1
+
+        # ball collision with the player 1 's paddle
+        if ball_y < 50:
+            if player < ball_y :
+                if player + 8 > ball_y:
+                    ball_dy *= -1
+
+        # player 1 collides with upper wall
+        if player_x <= 20:
+            player_x = 20
+        
+        # player 1 collides with lower wall
+        elif player_x >= 430:
+            player_x = 430
+
 
     # drawing objects
     screen.blit(frame, (10, 10))
