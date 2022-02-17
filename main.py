@@ -90,6 +90,18 @@ while game_loop:
     ball_y = ball_y + ball_dy
     screen.fill(BLACK)
 
+    # ball collision with the wall
+    if ball_x > 457:
+        ball_dx *= -1
+    elif ball_x <= 20:
+        ball_dx *= -1
+
+    # ball collision with the wall
+    if ball_y >= 580:
+        ball_dy *= -1
+    if ball_y <= 28:
+        ball_dy *= -1
+
     # events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -104,25 +116,18 @@ while game_loop:
             # clear screen
             screen.fill(BLACK)
         
-        # ball collision with the wall
-        if ball_x > 520:
-            ball_dx *= -1
-        elif ball_x <= 0:
-            ball_dx *= -1
 
-        # ball collision with the player 1 's paddle
-        if ball_y < 50:
-            if player < ball_y :
-                if player + 8 > ball_y:
-                    ball_dy *= -1
+        
 
         # player 1 collides with upper wall
         if player_x <= 20:
             player_x = 20
-        
+    
         # player 1 collides with lower wall
         elif player_x >= 430:
             player_x = 430
+        
+        
 
 
     # drawing objects
