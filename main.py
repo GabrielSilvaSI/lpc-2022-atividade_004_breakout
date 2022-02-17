@@ -1,11 +1,5 @@
 import pygame
 from brick import Brick
-from random import randint
-
-def start_ball():
-    number_start = randint(100, 400)
-    return number_start
-
 
 pygame.init()  # Start pygame functions
 
