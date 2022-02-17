@@ -30,7 +30,7 @@ frame = pygame.image.load("assets/frame.png")
 
 # player
 player = pygame.image.load("assets/player.png")  # player sprite
-player_x = 225  # player X position
+player_x = 200  # player X position
 player_move_left = False  # player's initial movement condition
 player_move_right = False
 
@@ -90,18 +90,19 @@ while game_loop:
     ball_y = ball_y + ball_dy
     screen.fill(BLACK)
 
-    # ball collision with the wall
+    # ball collision with the side walls
     if ball_x > 457:
         ball_dx *= -1
     elif ball_x <= 20:
         ball_dx *= -1
 
-    # ball collision with the wall
-    if ball_y >= 580:
+    # ball collision with the top and botton wall
+    if ball_y >= 575:
         ball_dy *= -1
     if ball_y <= 28:
         ball_dy *= -1
-
+    
+                
     # events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -116,18 +117,17 @@ while game_loop:
             # clear screen
             screen.fill(BLACK)
         
-
-        
-
-        # player 1 collides with upper wall
+        # dellimiters 
         if player_x <= 20:
             player_x = 20
-    
-        # player 1 collides with lower wall
         elif player_x >= 430:
             player_x = 430
-        
-        
+
+        # ball collision with the player's paddle
+        if ball_y >= 525:
+            if 525 <= ball_y + 10:
+                if 525 + 20 > ball_y:
+                    ball_dy *= -1
 
 
     # drawing objects
