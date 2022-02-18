@@ -30,7 +30,7 @@ frame = pygame.image.load("assets/frame.png")
 
 # player
 player = pygame.image.load("assets/player.png")  # player sprite
-player_x = 200  # player X position
+player_x = 535  # player X position
 player_move_left = False  # player's initial movement condition
 player_move_right = False
 
@@ -76,10 +76,9 @@ attempt_2_text_rect.center = (300, 55)
 
 # score
 score = 0
+lives = 3
 
 # sound effects
-paddle_sound = pygame.mixer.Sound('assets/paddle.wav')
-wall_sound = pygame.mixer.Sound('assets/wall.wav')
 brick_sound = pygame.mixer.Sound('assets/brick.wav')
 miss_sound = pygame.mixer.Sound('assets/miss.wav')
 
@@ -92,14 +91,22 @@ while game_loop:
 
     # ball collision with the side walls
     if ball_x > 457:
+        pygame.mixer.music.load('assets/wall.wav')     
+        pygame.mixer.music.play() 
         ball_dx *= -1
     elif ball_x <= 20:
+        pygame.mixer.music.load('assets/wall.wav')     
+        pygame.mixer.music.play() 
         ball_dx *= -1
 
     # ball collision with the top and botton wall
     if ball_y >= 575:
+        pygame.mixer.music.load('assets/miss.wav')
+        pygame.mixer.music.play()
         ball_dy *= -1
     if ball_y <= 28:
+        pygame.mixer.music.load('assets/wall.wav')     
+        pygame.mixer.music.play() 
         ball_dy *= -1
     
                 
@@ -127,6 +134,8 @@ while game_loop:
         if ball_y >= 525:
             if 525 <= ball_y + 10:
                 if 525 + 20 > ball_y:
+                    pygame.mixer.music.load('assets/paddle.wav')     
+                    pygame.mixer.music.play()
                     ball_dy *= -1
 
 
